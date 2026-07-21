@@ -1,0 +1,16 @@
+# dependencies / build output
+node_modules/
+dist/
+
+# 배포용 zip과, 그 zip을 푼 폴더 (app/ · app-mingyeol/ 소스와 완전히 동일한 중복본)
+*.zip
+민건이의-우주미션-앱/
+민결이의-동화나라모험-앱/
+민결이의-우주미션-앱/
+
+# Claude Code 로컬 전용 설정 (머신별 경로 포함)
+.claude/settings.local.json
+
+# editor / OS
+.DS_Store
+*.local

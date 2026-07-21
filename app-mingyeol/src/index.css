@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@400;700&family=Fredoka:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Jua", ui-rounded, "Apple SD Gothic Neo", sans-serif;
+  --font-mono: "Fredoka", ui-rounded, sans-serif;
+  --font-hand: "Gaegu", "Jua", cursive;
+
+  /* Soft candy palette */
+  --color-cream: #fffaf5;
+  --color-milk: #ffffff;
+  --color-cocoa: #6b5a72;
+  --color-cocoa-soft: #9a8aa3;
+
+  --color-peach: #ffb3a7;
+  --color-strawberry: #ff8fab;
+  --color-lemon: #ffd98e;
+  --color-mint: #8fdcc7;
+  --color-sky: #a5d8f5;
+  --color-lavender: #c9b6f5;
+}
+
+@layer base {
+  body {
+    /* Storybook meadow: soft sky up top, warm sunlight, a hint of grass at the foot of the page */
+    background:
+      radial-gradient(circle at 15% 6%, #dff1ff 0%, transparent 42%),
+      radial-gradient(circle at 85% 8%, #ffe7f3 0%, transparent 42%),
+      radial-gradient(circle at 50% 30%, #fff6e6 0%, transparent 55%),
+      linear-gradient(180deg, #f3fbff 0%, #fff8ef 55%, #eafbe9 100%);
+    background-attachment: fixed;
+    color: #6b5a72;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ---- Candy cards: pillowy white panels with a soft colored lip ---- */
+.candy-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid #ffffff;
+  box-shadow:
+    0 10px 24px rgba(186, 150, 190, 0.18),
+    0 2px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+.candy-item {
+  background: rgba(255, 255, 255, 0.75);
+  border: 2px solid #f4e6f0;
+  box-shadow: 0 4px 12px rgba(186, 150, 190, 0.12);
+}
+
+.candy-item-done {
+  background: linear-gradient(135deg, #fff0f6 0%, #ffe9f2 100%);
+  border-color: #ff8fab;
+  box-shadow: 0 6px 16px rgba(255, 143, 171, 0.28);
+}
+
+/* ---- Text treatments ---- */
+.title-candy {
+  color: #e8497b;
+  text-shadow:
+    0 2px 0 #ffffff,
+    0 4px 10px rgba(255, 143, 171, 0.35);
+}
+
+.text-soft-shadow {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ---- Journey endpoints: cozy cottage at the start, magic castle at the goal ---- */
+.home-badge {
+  background: radial-gradient(circle at 32% 28%, #d6f5d0, #a6e39c);
+  box-shadow: 0 6px 14px rgba(140, 205, 130, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.9);
+}
+
+.castle-badge {
+  background: radial-gradient(circle at 32% 28%, #ffe9b8, #ffd07a);
+  box-shadow: 0 6px 16px rgba(255, 190, 110, 0.55), 0 0 0 4px rgba(255, 255, 255, 0.9);
+}
+
+/* ---- Soft pastel glows (replaces the neon set) ---- */
+.glow-pink {
+  box-shadow: 0 6px 18px rgba(255, 143, 171, 0.35);
+}
+
+.glow-mint {
+  box-shadow: 0 6px 18px rgba(143, 220, 199, 0.4);
+}
+
+.glow-lemon {
+  box-shadow: 0 6px 18px rgba(255, 217, 142, 0.45);
+}
+
+/* ---- Animations: bouncier and softer than the original ---- */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.85) rotate(0deg); }
+  50% { opacity: 0.95; transform: scale(1.15) rotate(12deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-9px) rotate(3deg); }
+}
+
+@keyframes puff {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.25); opacity: 1; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+
+.animate-twinkle { animation: twinkle 3.2s ease-in-out infinite; }
+.animate-float { animation: float 5.5s ease-in-out infinite; }
+.animate-thrust { animation: puff 0.35s ease-in-out infinite; }
+.animate-wiggle { animation: wiggle 2.2s ease-in-out infinite; }
+
+/* ---- Chunky rounded scrollbars ---- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fdeef5;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ffb3c9;
+  border: 2px solid #fdeef5;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff8fab;
+}
