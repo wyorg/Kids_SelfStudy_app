@@ -2,8 +2,24 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>민건이의 우주 미션 체크 웹앱</title>
+    <meta name="description" content="민건이가 매일 자기주도 학습 미션을 스스로 체크하는 우주 탐험 앱" />
+
+    <!-- 홈화면 설치(PWA) -->
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#050714" />
+
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="./favicon-48.png" />
+
+    <!-- iOS 홈화면 아이콘 / 전체화면 -->
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="우주 미션" />
+    <meta name="mobile-web-app-capable" content="yes" />
   </head>
   <body class="bg-[#050714] text-white">
     <div id="root"></div>

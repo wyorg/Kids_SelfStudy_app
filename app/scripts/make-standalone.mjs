@@ -9,6 +9,11 @@ const dist = path.join(root, 'dist');
 
 let html = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 
+// 단일 HTML(더블클릭)에서는 외부 파일(manifest·아이콘)을 불러올 수 없으므로
+// PWA 전용 링크 태그를 제거해 file:// 404 를 방지한다. (서비스 워커 등록 코드는
+// http(s) 가 아니면 스스로 건너뛴다.)
+html = html.replace(/\s*<link\b[^>]*\brel="(?:manifest|apple-touch-icon|icon)"[^>]*>/g, '');
+
 // Inline <link rel="stylesheet" href="./assets/xxx.css">
 html = html.replace(/<link[^>]*rel="stylesheet"[^>]*href="([^"]+)"[^>]*>/g, (_m, href) => {
   const css = fs.readFileSync(path.join(dist, href), 'utf8');
