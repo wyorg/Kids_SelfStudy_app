@@ -118,6 +118,7 @@ const INITIAL_MISSIONS: Mission[] = [
 
 export default function App() {
   // State variables
+  const [childName, setChildName] = useState('민건');
   const [missions, setMissions] = useState<Mission[]>([]);
   const [rewardText, setRewardText] = useState('시원하고 맛있는 초코 아이스크림 하나 먹기! 🍦');
   const [stampCount, setStampCount] = useState<number>(0);
@@ -168,8 +169,40 @@ export default function App() {
     return `${d.getFullYear()}-${mm}-${dd}`;
   }, []);
 
+  // Familiar Korean form of the name (e.g. 민건 → 민건이, 민수 → 민수), which always
+  // ends in a vowel so the following 의/가/를/에게… particles stay grammatical for any name.
+  const famName = useMemo(() => {
+    const n = childName.trim();
+    if (!n) return '민건이';
+    const code = n.charCodeAt(n.length - 1);
+    const isHangul = code >= 0xac00 && code <= 0xd7a3;
+    const hasBatchim = isHangul && (code - 0xac00) % 28 !== 0;
+    return hasBatchim ? n + '이' : n;
+  }, [childName]);
+
+  // Vocative form used when calling out to the child (민건 → 민건아, 민수 → 민수야).
+  const vocativeName = useMemo(() => {
+    const n = childName.trim();
+    if (!n) return '민건아';
+    const code = n.charCodeAt(n.length - 1);
+    const isHangul = code >= 0xac00 && code <= 0xd7a3;
+    const hasBatchim = isHangul && (code - 0xac00) % 28 !== 0;
+    return hasBatchim ? n + '아' : n + '야';
+  }, [childName]);
+
+  // Keep the browser tab / installed-app title in sync with the chosen name.
+  useEffect(() => {
+    document.title = `${famName}의 우주 미션 체크 웹앱`;
+  }, [famName]);
+
   // 1. Initial Load
   useEffect(() => {
+    // Load child name
+    const savedName = localStorage.getItem('mingeon-child-name');
+    if (savedName && savedName.trim()) {
+      setChildName(savedName);
+    }
+
     // Load missions
     const savedMissions = localStorage.getItem('mingeon-missions');
     if (savedMissions) {
@@ -421,6 +454,12 @@ export default function App() {
     localStorage.setItem('mingeon-reward', val);
   };
 
+  const changeChildName = (val: string) => {
+    const trimmed = val.slice(0, 10);
+    setChildName(trimmed);
+    localStorage.setItem('mingeon-child-name', trimmed);
+  };
+
   const resetAllMissions = () => {
     if (window.confirm('정말 오늘 미션을 모두 처음 상태로 안 푼 것처럼 돌릴까요?')) {
       const updated = missions.map(m => ({ ...m, completed: false }));
@@ -535,7 +574,7 @@ export default function App() {
             </div>
             
             <h1 className="text-4xl sm:text-5xl font-extrabold text-gold-shadow tracking-tight leading-none mt-1 select-none">
-              🚀 민건이의 오늘 우주 미션!
+              🚀 {famName}의 오늘 우주 미션!
             </h1>
 
             {/* Glowing Earth Date badge */}
@@ -637,7 +676,7 @@ export default function App() {
                 🎉 와아! 오늘 모든 미션을 해결했어요! 칭찬 보상을 받으러 가요! 🛰️
               </span>
             ) : (
-              <span>오늘의 남은 임무: <span className="text-yellow-300 font-extrabold">{totalMissions - completedMissions}개</span>! 힘을 내요, 민건 대장님! 💪</span>
+              <span>오늘의 남은 임무: <span className="text-yellow-300 font-extrabold">{totalMissions - completedMissions}개</span>! 힘을 내요, {childName} 대장님! 💪</span>
             )}
           </div>
         </section>
@@ -809,7 +848,7 @@ export default function App() {
         <div className="bg-blue-950/20 border border-blue-900/30 rounded-xl p-3 flex items-start gap-2.5 mb-8 text-xs text-blue-300 select-none">
           <Info size={16} className="text-blue-400 shrink-0 mt-0.5" />
           <p className="leading-relaxed">
-            민건아! 매일 공부해야 하는 소중한 숙제들을 다 끝내고 초록색 버튼을 눌러줘! 
+            {vocativeName}! 매일 공부해야 하는 소중한 숙제들을 다 끝내고 초록색 버튼을 눌러줘!
             모든 미션을 완수하면 대단한 칭찬 보상 카드를 받을 수 있어! 🌟
           </p>
         </div>
@@ -871,7 +910,7 @@ export default function App() {
                       <Lock size={36} className="mx-auto text-purple-400 mb-2 animate-bounce" />
                       <h3 className="text-base font-bold text-purple-200 mb-1">진짜 엄마, 아빠가 맞나요?</h3>
                       <p className="text-xs text-purple-300/80 mb-4 leading-relaxed">
-                        민건이가 실수로 숙제 내용을 수정하지 못하도록 설정한 안전 잠금장치입니다.<br/> 아래의 덧셈 문제를 맞혀서 잠금을 해제해주세요.
+                        {famName}가 실수로 숙제 내용을 수정하지 못하도록 설정한 안전 잠금장치입니다.<br/> 아래의 덧셈 문제를 맞혀서 잠금을 해제해주세요.
                       </p>
                       
                       <form onSubmit={unlockParentQuiz} className="flex flex-col sm:flex-row items-center gap-2.5 justify-center">
@@ -913,6 +952,29 @@ export default function App() {
                         >
                           <Lock size={12} /> 설정 완료 (잠금)
                         </button>
+                      </div>
+
+                      {/* 0. Child Name Setting */}
+                      <div className="bg-purple-950/20 border border-purple-800/40 rounded-xl p-4">
+                        <h4 className="text-sm font-bold text-purple-300 mb-1.5 flex items-center gap-1.5">
+                          <Sparkles size={16} className="text-yellow-300" /> 우리 아이 이름 설정
+                        </h4>
+                        <p className="text-[11px] text-slate-400 mb-2.5">
+                          앱 곳곳의 이름(제목·칭찬 문구·축하 화면)이 아래 이름으로 바뀝니다. 다른 아이가 쓸 때 이름만 바꿔주세요.
+                        </p>
+                        <div className="flex items-center gap-2.5">
+                          <input
+                            type="text"
+                            value={childName}
+                            onChange={(e) => changeChildName(e.target.value)}
+                            placeholder="예) 민건, 민결, 서아"
+                            maxLength={10}
+                            className="flex-1 px-3 py-2 bg-slate-900 border border-purple-700/50 rounded-lg text-sm font-bold text-purple-100 placeholder:text-slate-500 placeholder:font-normal focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                          />
+                          <span className="shrink-0 text-xs text-slate-400 font-sans">
+                            미리보기: <span className="text-yellow-300 font-bold">{famName}의 오늘 우주 미션!</span>
+                          </span>
+                        </div>
                       </div>
 
                       {/* A. Create Custom Mission Form */}
@@ -1011,7 +1073,7 @@ export default function App() {
                           <Trophy size={16} className="text-yellow-400" /> 3. 오늘의 최종 완료 보상 문구 설정
                         </h4>
                         <p className="text-[11px] text-slate-400 mb-2">
-                          오늘의 모든 미션을 다 성공했을 때 팝업 화면에 띄워 줄 민건이만의 특별 선물/혜택을 적어주세요.
+                          오늘의 모든 미션을 다 성공했을 때 팝업 화면에 띄워 줄 {famName}만의 특별 선물/혜택을 적어주세요.
                         </p>
                         <input
                           type="text"
@@ -1029,7 +1091,7 @@ export default function App() {
                             <Gift size={16} className="text-cyan-400" /> 4. 30개 스탬프 최종 선물 문구 설정
                           </h4>
                           <p className="text-[11px] text-slate-400 mb-2">
-                            스탬프를 30개 모두 모았을 때 민건이가 받을 최종 대형 선물을 설정해주세요.
+                            스탬프를 30개 모두 모았을 때 {famName}가 받을 최종 대형 선물을 설정해주세요.
                           </p>
                           <input
                             type="text"
@@ -1224,7 +1286,7 @@ export default function App() {
                 🏆 임무 성공!
               </h2>
               <p className="text-lg font-bold text-blue-200 mb-6">
-                우주 비행사 민건 대장님, 대단해요! 🛰️
+                우주 비행사 {childName} 대장님, 대단해요! 🛰️
               </p>
 
               {/* Parent customized Reward Card */}
@@ -1298,13 +1360,13 @@ export default function App() {
                 은하계 최종 임무 성공!
               </h2>
               <p className="text-lg font-bold text-slate-200 mb-6 px-4">
-                우주 비행사 민건 대장님, 30개의 스탬프를 모두 모아 우주정거장에 성공적으로 착륙했습니다! 정말 위대해요! 🛰️❤️
+                우주 비행사 {childName} 대장님, 30개의 스탬프를 모두 모아 우주정거장에 성공적으로 착륙했습니다! 정말 위대해요! 🛰️❤️
               </p>
 
               {/* Giant Prize box details */}
               <div className="bg-white/5 border-2 border-yellow-400/60 p-6 rounded-[28px] mb-8 relative overflow-hidden shadow-[inset_0_0_20px_rgba(250,204,21,0.1)]">
                 <div className="absolute top-1.5 right-3 text-[9px] font-mono text-yellow-300 font-extrabold tracking-widest">30-STAMPS MEGA REWARD</div>
-                <span className="block text-xs font-bold text-slate-400 mb-2">🎁 민건이를 기다리는 진짜 초대형 선물 🎁</span>
+                <span className="block text-xs font-bold text-slate-400 mb-2">🎁 {famName}를 기다리는 진짜 초대형 선물 🎁</span>
                 <span className="block text-xl sm:text-2xl font-black text-yellow-300 leading-snug drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                   {finalGiftText}
                 </span>
@@ -1312,10 +1374,10 @@ export default function App() {
 
               <div className="text-xs text-slate-400 space-y-2 mb-8 px-2 leading-relaxed">
                 <p>
-                  엄마, 아빠! 약속하셨던 대망의 30일 보상 선물을 민건이에게 전달해주세요! 😍
+                  엄마, 아빠! 약속하셨던 대망의 30일 보상 선물을 {famName}에게 전달해주세요! 😍
                 </p>
                 <p>
-                  민건이의 엄청난 성실함과 노력을 가득 칭찬해 주시고 많이 안아주세요! ✨
+                  {famName}의 엄청난 성실함과 노력을 가득 칭찬해 주시고 많이 안아주세요! ✨
                 </p>
               </div>
 
