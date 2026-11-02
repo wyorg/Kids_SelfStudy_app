@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>우리 아이 오늘의 미션 — 사용설명서</title>
+<style>
+  :root {
+    --ink: #2b2435;
+    --dim: #6b6076;
+    --line: #ece6f1;
+    --card: #ffffff;
+    --space: #6d5cf0;
+    --space-soft: #eceaff;
+    --fairy: #ff7aa6;
+    --fairy-soft: #ffe7f0;
+    --gold: #c98a12;
+    --good: #1f9d74;
+    --bg1: #f4f1ff;
+    --bg2: #fff5f9;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", system-ui, sans-serif;
+    color: var(--ink);
+    line-height: 1.65;
+    background:
+      radial-gradient(circle at 12% 0%, var(--bg1) 0%, transparent 45%),
+      radial-gradient(circle at 92% 4%, var(--bg2) 0%, transparent 45%),
+      #fbfafe;
+    padding: 0 16px 64px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  header.hero {
+    text-align: center;
+    padding: 44px 20px 28px;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    color: var(--space);
+    background: var(--space-soft);
+    border-radius: 999px;
+    padding: 5px 14px;
+    margin-bottom: 14px;
+  }
+  h1 { font-size: 28px; margin: 6px 0 8px; line-height: 1.3; }
+  .hero p { color: var(--dim); margin: 0; font-size: 15px; }
+
+  section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px 22px 20px;
+    margin: 16px 0;
+    box-shadow: 0 6px 18px rgba(90, 70, 120, 0.06);
+  }
+  h2 { font-size: 19px; margin: 0 0 6px; display: flex; align-items: center; gap: 9px; }
+  h2 .n {
+    flex: none; width: 26px; height: 26px; border-radius: 8px;
+    background: var(--space); color: #fff; font-size: 14px; font-weight: 700;
+    display: grid; place-items: center;
+  }
+  h3 { font-size: 15px; margin: 16px 0 4px; color: var(--ink); }
+  p, li { font-size: 14.5px; }
+  ul { margin: 6px 0; padding-left: 20px; }
+  li { margin: 4px 0; }
+  .lead { color: var(--dim); margin-top: 2px; }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 2px; }
+  .pill { font-size: 13px; font-weight: 600; border-radius: 999px; padding: 5px 12px; }
+  .pill.space { background: var(--space-soft); color: var(--space); }
+  .pill.fairy { background: var(--fairy-soft); color: var(--fairy); }
+
+  .step { display: flex; gap: 10px; align-items: baseline; margin: 7px 0; }
+  .step b { color: var(--space); flex: none; }
+
+  .key {
+    display: inline-block; font-size: 12.5px; font-weight: 600;
+    background: #f3f0fb; border: 1px solid var(--line); border-radius: 7px;
+    padding: 1px 7px; color: #4a3f58;
+  }
+  .note {
+    font-size: 13px; color: var(--dim);
+    background: #faf8ff; border-left: 3px solid var(--space);
+    border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 12px 0 0;
+  }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 520px) { .two { grid-template-columns: 1fr; } }
+  .mini { border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+  .mini h3 { margin-top: 0; }
+  footer { text-align: center; color: var(--dim); font-size: 12.5px; padding: 24px 10px 0; }
+  a { color: var(--space); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="badge">KIDS SELF-STUDY · 사용설명서</span>
+    <h1>🚀🏰 우리 아이 오늘의 미션</h1>
+    <p>아이가 매일의 학습 숙제를 <b>스스로</b> 체크하고, 하루를 다 끝내면 스탬프를 모아 보상을 받는 앱입니다.</p>
+  </header>
+
+  <section>
+    <h2><span class="n">?</span> 한눈에</h2>
+    <p class="lead">미션 체크 → 하루 완료 시 스탬프 1개 → 스탬프 30개면 최종 선물. 아이의 성취감을 눈으로 보여줍니다.</p>
+    <div class="pills">
+      <span class="pill">👧👦 여러 아이 등록</span>
+      <span class="pill space">🚀 우주 미션 테마</span>
+      <span class="pill fairy">🏰 동화나라 모험 테마</span>
+      <span class="pill">📲 홈화면 설치(PWA)</span>
+      <span class="pill">🔒 부모님 잠금</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">1</span> 아이가 쓰는 법</h2>
+    <ul>
+      <li><b>미션 카드를 톡 누르면</b> 완료 표시가 되고, 로켓🚀(또는 열기구🎈)이 목적지로 전진해요.</li>
+      <li>오늘의 <b>모든 미션</b>을 끝내면 🎉 축하 화면과 함께 부모님이 정한 <b>보상</b>이 나와요.</li>
+      <li>하루를 다 끝낸 날마다 <b>스탬프 1개</b>를 받아요. (최대 30개)</li>
+      <li>스탬프 <b>30개</b>를 모두 모으면 <b>최종 선물</b> 대형 축하 화면이 열려요.</li>
+      <li>오른쪽 위 🔊 버튼으로 효과음을 끄고 켤 수 있어요.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> 여러 아이 &amp; 테마 바꾸기</h2>
+    <p class="lead">한 앱에서 아이 여러 명을 쓸 수 있고, 아이마다 테마와 기록(미션·스탬프·달력)이 <b>따로</b> 저장됩니다.</p>
+    <ul>
+      <li><b>전환:</b> 화면 맨 위 바에서 아이 이름을 누르면 그 아이 화면으로 바뀝니다.</li>
+      <li><b>테마:</b> 아이마다 <span class="pill space">우주 미션</span> 또는 <span class="pill fairy">동화나라 모험</span> 중 선택 (부모님 센터에서 언제든 변경).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> 부모님 관리 센터</h2>
+    <p class="lead">아이가 실수로 바꾸지 못하도록 <b>덧셈 문제 잠금</b>으로 보호됩니다.</p>
+    <div class="step"><b>①</b><span>화면 맨 아래 <span class="key">⚙️ 부모님 관리 센터</span>를 엽니다.</span></div>
+    <div class="step"><b>②</b><span>나오는 <b>덧셈 문제</b>를 풀어 잠금을 해제합니다.</span></div>
+    <div class="step"><b>③</b><span>아래 항목을 설정합니다:</span></div>
+    <ul>
+      <li><b>아이 프로필 &amp; 테마</b> — 아이 추가/삭제, 이름 변경, 테마 전환</li>
+      <li><b>미션 추가/삭제</b> — 아이콘(이모지) + 숙제 내용</li>
+      <li><b>보상 문구</b> — 하루 완료 보상 / 스탬프 30개 최종 선물</li>
+      <li><b>스탬프 수동 조정</b> 및 <b>최근 7일 성공 기록</b></li>
+    </ul>
+    <div class="note">이름은 받침에 맞춰 조사가 자동으로 바뀝니다. 예) <b>민건</b> → "민건이의", "민건아" / <b>서아</b> → "서아의", "서아야".</div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> 태블릿·휴대폰에 설치하기</h2>
+    <div class="two">
+      <div class="mini">
+        <h3>🤖 Android · Chrome</h3>
+        <p>주소창 오른쪽 <b>⋮ 메뉴</b> → <b>앱 설치</b> / <b>홈 화면에 추가</b></p>
+      </div>
+      <div class="mini">
+        <h3> iPhone · iPad · Safari</h3>
+        <p>아래 <b>공유</b> 버튼 → <b>홈 화면에 추가</b></p>
+      </div>
+    </div>
+    <div class="note">설치하면 홈화면에 <b>앱 아이콘</b>이 생기고, 인터넷이 없어도 열립니다(오프라인 지원).</div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> 데이터 저장 &amp; 개인정보</h2>
+    <ul>
+      <li>모든 기록은 <b>그 기기의 브라우저(LocalStorage)</b>에만 저장됩니다. 서버로 보내지 않아요.</li>
+      <li>따라서 <b>같은 기기·같은 브라우저</b>에서 열어야 기록이 이어집니다.</li>
+      <li>회원가입·로그인·수집되는 개인정보가 <b>전혀 없습니다.</b></li>
+    </ul>
+  </section>
+
+  <footer>
+    React 19 · Vite 6 · Tailwind CSS v4 · Motion · canvas-confetti · 설치형 PWA<br />
+    우리 아이 오늘의 미션 © 2026
+  </footer>
+
+</div>
+</body>
+</html>
