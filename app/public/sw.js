@@ -4,14 +4,16 @@
  * 오프라인일 때는 마지막으로 저장된 버전으로 앱이 열리도록 합니다.
  * 앱을 크게 바꾼 뒤에는 아래 CACHE 버전 숫자를 올리세요.
  */
-const CACHE = 'kids-mission-v2';
+const CACHE = 'kids-mission-v3';
+// 상대 경로로 둬서 루트 배포(Vercel)와 하위 경로 배포(GitHub Pages: /<repo>/) 모두에서 동작.
+// 서비스워커 안의 상대 URL 은 sw.js 위치(= 배포 루트)를 기준으로 해석됩니다.
 const CORE = [
-  '/',
-  '/index.html',
-  '/manifest.webmanifest',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/apple-touch-icon.png',
+  './',
+  './index.html',
+  './manifest.webmanifest',
+  './icon-192.png',
+  './icon-512.png',
+  './apple-touch-icon.png',
 ];
 
 self.addEventListener('install', (event) => {
@@ -45,7 +47,7 @@ self.addEventListener('fetch', (event) => {
         return res;
       })
       .catch(() =>
-        caches.match(req).then((cached) => cached || caches.match('/index.html'))
+        caches.match(req).then((cached) => cached || caches.match('./index.html'))
       )
   );
 });
