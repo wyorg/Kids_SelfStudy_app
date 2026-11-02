@@ -4,7 +4,7 @@
  * 오프라인일 때는 마지막으로 저장된 버전으로 앱이 열리도록 합니다.
  * 앱을 크게 바꾼 뒤에는 아래 CACHE 버전 숫자를 올리세요.
  */
-const CACHE = 'space-mission-v1';
+const CACHE = 'kids-mission-v2';
 const CORE = [
   '/',
   '/index.html',

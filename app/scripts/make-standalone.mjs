@@ -26,6 +26,6 @@ html = html.replace(/<script[^>]*src="([^"]+)"[^>]*><\/script>/g, (_m, src) => {
   return `<script type="module">\n${js}\n</script>`;
 });
 
-const out = path.join(root, '민건이의-우주미션.html');
+const out = path.join(root, '우리아이-오늘의미션.html');
 fs.writeFileSync(out, html, 'utf8');
 console.log('standalone written:', out, (html.length / 1024).toFixed(0) + ' KB');

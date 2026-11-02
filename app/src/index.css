@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jua&family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Orbitron:wght@400;700;900&family=Gaegu:wght@400;700&family=Fredoka:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -14,18 +14,38 @@
   --color-text-gold: #ffcc33;
 }
 
+/* =========================================================
+   Base + per-theme page skin (data-theme on <html>)
+   ========================================================= */
 @layer base {
   body {
-    background: radial-gradient(circle at 50% 50%, #0b112b 0%, #050714 100%);
     color: #ffffff;
     font-family: var(--font-sans);
     overflow-x: hidden;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    /* default (space) page background */
+    background: radial-gradient(circle at 50% 50%, #0b112b 0%, #050714 100%);
+  }
+
+  /* Fairytale skin: pastel storybook meadow + rounded mono font */
+  :root[data-theme="fairytale"] {
+    --font-mono: "Fredoka", ui-rounded, sans-serif;
+  }
+  :root[data-theme="fairytale"] body {
+    color: #6b5a72;
+    background:
+      radial-gradient(circle at 15% 6%, #dff1ff 0%, transparent 42%),
+      radial-gradient(circle at 85% 8%, #ffe7f3 0%, transparent 42%),
+      radial-gradient(circle at 50% 30%, #fff6e6 0%, transparent 55%),
+      linear-gradient(180deg, #f3fbff 0%, #fff8ef 55%, #eafbe9 100%);
+    background-attachment: fixed;
   }
 }
 
-/* Frosted Glass styling */
+/* =========================================================
+   SPACE theme component styles
+   ========================================================= */
 .frosted-glass {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(15px);
@@ -49,7 +69,6 @@
   text-shadow: 0 0 20px rgba(255, 204, 51, 0.5);
 }
 
-/* Celestial Bodies */
 .earth-sphere {
   background: radial-gradient(circle at 30% 30%, #4ab1ff, #003366);
   box-shadow: 0 0 20px rgba(74, 177, 255, 0.4);
@@ -60,68 +79,205 @@
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
-/* Custom glow effects for space scientist theme */
 .neon-glow-blue {
   box-shadow: 0 0 15px rgba(0, 242, 255, 0.4), inset 0 0 10px rgba(0, 242, 255, 0.1);
 }
-
 .neon-glow-purple {
   box-shadow: 0 0 15px rgba(255, 0, 234, 0.4), inset 0 0 10px rgba(255, 0, 234, 0.1);
 }
-
 .neon-glow-green {
   box-shadow: 0 0 20px rgba(34, 197, 94, 0.6), inset 0 0 10px rgba(34, 197, 94, 0.3);
 }
-
 .neon-text-glow {
   text-shadow: 0 0 8px rgba(0, 242, 255, 0.8), 0 0 20px rgba(0, 242, 255, 0.4);
 }
-
 .neon-text-green {
   text-shadow: 0 0 8px rgba(34, 197, 94, 0.8), 0 0 20px rgba(34, 197, 94, 0.4);
 }
 
-/* Star twinkling animations */
+/* =========================================================
+   FAIRYTALE theme component styles
+   ========================================================= */
+.candy-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid #ffffff;
+  box-shadow: 0 10px 24px rgba(186, 150, 190, 0.18), 0 2px 0 rgba(255, 255, 255, 0.9) inset;
+}
+.candy-item {
+  background: rgba(255, 255, 255, 0.75);
+  border: 2px solid #f4e6f0;
+  box-shadow: 0 4px 12px rgba(186, 150, 190, 0.12);
+}
+.candy-item-done {
+  background: linear-gradient(135deg, #fff0f6 0%, #ffe9f2 100%);
+  border-color: #ff8fab;
+  box-shadow: 0 6px 16px rgba(255, 143, 171, 0.28);
+}
+.title-candy {
+  color: #e8497b;
+  text-shadow: 0 2px 0 #ffffff, 0 4px 10px rgba(255, 143, 171, 0.35);
+}
+.text-soft-shadow {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.home-badge {
+  background: radial-gradient(circle at 32% 28%, #d6f5d0, #a6e39c);
+  box-shadow: 0 6px 14px rgba(140, 205, 130, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.9);
+}
+.castle-badge {
+  background: radial-gradient(circle at 32% 28%, #ffe9b8, #ffd07a);
+  box-shadow: 0 6px 16px rgba(255, 190, 110, 0.55), 0 0 0 4px rgba(255, 255, 255, 0.9);
+}
+.glow-pink { box-shadow: 0 6px 18px rgba(255, 143, 171, 0.35); }
+.glow-mint { box-shadow: 0 6px 18px rgba(143, 220, 199, 0.4); }
+.glow-lemon { box-shadow: 0 6px 18px rgba(255, 217, 142, 0.45); }
+
+/* =========================================================
+   Shared animations
+   ========================================================= */
 @keyframes twinkle {
   0%, 100% { opacity: 0.3; transform: scale(0.8); }
   50% { opacity: 0.8; transform: scale(1.2); }
 }
-
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-10px) rotate(2deg); }
 }
-
 @keyframes rocket-thrust {
   0%, 100% { transform: scaleY(1); opacity: 0.8; }
   50% { transform: scaleY(1.3); opacity: 1; }
 }
+@keyframes puff {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.25); opacity: 1; }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+.animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-thrust { animation: rocket-thrust 0.15s ease-in-out infinite; }
+.animate-puff { animation: puff 0.35s ease-in-out infinite; }
+.animate-wiggle { animation: wiggle 2.2s ease-in-out infinite; }
 
-.animate-twinkle {
-  animation: twinkle 3s ease-in-out infinite;
+/* =========================================================
+   Scrollbars (per theme)
+   ========================================================= */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgba(10, 10, 44, 0.3); border-radius: 999px; }
+::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.5); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 0, 234, 0.7); }
+:root[data-theme="fairytale"] ::-webkit-scrollbar-track { background: #fdeef5; }
+:root[data-theme="fairytale"] ::-webkit-scrollbar-thumb { background: #ffb3c9; border: 2px solid #fdeef5; }
+:root[data-theme="fairytale"] ::-webkit-scrollbar-thumb:hover { background: #ff8fab; }
+
+/* =========================================================
+   Shell chrome (profile bar + profile/theme settings),
+   themed via --kid-* tokens so one markup fits both themes
+   ========================================================= */
+:root {
+  --kid-card: rgba(255, 255, 255, 0.07);
+  --kid-border: rgba(255, 255, 255, 0.16);
+  --kid-text: #e8eefc;
+  --kid-dim: #93a0bf;
+  --kid-accent: #00f2ff;
+  --kid-accent-ink: #67e8f9;
+  --kid-chip: rgba(255, 255, 255, 0.05);
+  --kid-chip-border: rgba(255, 255, 255, 0.14);
+  --kid-chip-on: rgba(0, 242, 255, 0.16);
+  --kid-chip-on-border: #00f2ff;
+  --kid-input: #0b1326;
+  --kid-input-border: rgba(255, 255, 255, 0.18);
+  --kid-on-accent: #04121b;
+  --kid-danger: #fb7185;
+}
+:root[data-theme="fairytale"] {
+  --kid-card: rgba(255, 255, 255, 0.85);
+  --kid-border: #ffffff;
+  --kid-text: #5c4c64;
+  --kid-dim: #8a7b93;
+  --kid-accent: #ff8fab;
+  --kid-accent-ink: #c33c64;
+  --kid-chip: #ffffff;
+  --kid-chip-border: #f0e2ec;
+  --kid-chip-on: #ffe1ea;
+  --kid-chip-on-border: #ff8fab;
+  --kid-input: #fff7fb;
+  --kid-input-border: #e6d6e4;
+  --kid-on-accent: #ffffff;
+  --kid-danger: #e05573;
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-thrust {
-  animation: rocket-thrust 0.15s ease-in-out infinite;
-}
-
-/* Custom scrollbars for tablet panels */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: rgba(10, 10, 44, 0.3);
+.kid-bar {
+  background: var(--kid-card);
+  border: 1.5px solid var(--kid-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 242, 255, 0.5);
+.kid-chip {
+  background: var(--kid-chip);
+  border: 1.5px solid var(--kid-chip-border);
+  color: var(--kid-text);
   border-radius: 999px;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 0, 234, 0.7);
+.kid-chip:hover { border-color: var(--kid-accent); }
+.kid-chip[data-on="true"] {
+  background: var(--kid-chip-on);
+  border-color: var(--kid-chip-on-border);
+  color: var(--kid-accent-ink);
+  font-weight: 700;
+}
+.kid-panel {
+  background: var(--kid-chip);
+  border: 1.5px solid var(--kid-chip-border);
+  border-radius: 16px;
+  color: var(--kid-text);
+}
+.kid-input {
+  background: var(--kid-input);
+  border: 1.5px solid var(--kid-input-border);
+  color: var(--kid-text);
+  border-radius: 10px;
+  outline: none;
+}
+.kid-input:focus { border-color: var(--kid-accent); }
+.kid-input::placeholder { color: var(--kid-dim); font-weight: 400; }
+.kid-btn {
+  background: var(--kid-accent);
+  color: var(--kid-on-accent);
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.2s ease;
+}
+.kid-btn:hover { filter: brightness(1.08); }
+.kid-btn:active { transform: scale(0.97); }
+.kid-btn-ghost {
+  background: transparent;
+  border: 1.5px solid var(--kid-chip-border);
+  color: var(--kid-dim);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.kid-dim { color: var(--kid-dim); }
+.kid-accent-ink { color: var(--kid-accent-ink); }
+.kid-seg {
+  border: 1.5px solid var(--kid-chip-border);
+  color: var(--kid-dim);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.kid-seg[data-on="true"] {
+  background: var(--kid-chip-on);
+  border-color: var(--kid-chip-on-border);
+  color: var(--kid-accent-ink);
+  font-weight: 700;
 }
