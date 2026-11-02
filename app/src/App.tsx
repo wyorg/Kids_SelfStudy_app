@@ -44,8 +44,9 @@ function loadProfiles(): Profile[] {
   } catch {
     /* ignore */
   }
-  // 최초 실행 / 복구: 기존 '민건'(우주) 데이터를 그대로 잇는 기본 프로필.
-  const legacyName = localStorage.getItem('mingeon-child-name') || '민건';
+  // 최초 실행 / 복구: 기존 기본(우주) 데이터를 그대로 잇는 기본 프로필.
+  // (id 'mingeon' 은 과거 저장 키 네임스페이스와의 호환을 위해 유지)
+  const legacyName = localStorage.getItem('mingeon-child-name') || '우리 아이';
   return [{ id: 'mingeon', name: legacyName, theme: 'space' }];
 }
 
@@ -157,7 +158,7 @@ export default function App() {
             value={active.name}
             onChange={(e) => renameActive(e.target.value)}
             maxLength={10}
-            placeholder="예) 민건, 민결, 서아"
+            placeholder="아이 이름 입력"
             className="kid-input flex-1 px-3 py-2 text-sm font-bold"
           />
           <span className="shrink-0 text-xs kid-dim">

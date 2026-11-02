@@ -2,16 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "space-mission-dev",
+      "name": "app-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "app", "run", "dev"],
       "port": 3000
-    },
-    {
-      "name": "mingyeol-dev",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "app-mingyeol", "run", "dev", "--", "--port", "3100"],
-      "port": 3100
     }
   ]
 }

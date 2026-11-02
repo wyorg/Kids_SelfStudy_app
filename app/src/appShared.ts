@@ -8,7 +8,7 @@
 export type Theme = 'space' | 'fairytale';
 
 export interface Profile {
-  id: string;   // localStorage 네임스페이스로도 쓰임 (예: 'mingeon', 'p-170...')
+  id: string;   // localStorage 네임스페이스로도 쓰임 (예: 'child1', 'p-170...')
   name: string;
   theme: Theme;
 }
@@ -101,13 +101,14 @@ function lastHasBatchim(name: string): boolean {
   return isHangul && (code - 0xac00) % 28 !== 0;
 }
 
-// 친근형(민건 → 민건이, 민수 → 민수). 항상 모음으로 끝나 뒤 조사(의/가/를/에게)가 자연스럽다.
+// 친근형(받침 있으면 +'이': 별 → 별이, 없으면 그대로: 나래 → 나래).
+// 항상 모음으로 끝나 뒤 조사(의/가/를/에게)가 자연스럽다.
 export function famForm(name: string, fallback = '친구'): string {
   const n = name.trim() || fallback;
   return lastHasBatchim(n) ? n + '이' : n;
 }
 
-// 부르는 형(민건 → 민건아, 서아 → 서아야).
+// 부르는 형(받침 있으면 +'아': 별 → 별아, 없으면 +'야': 나래 → 나래야).
 export function vocativeForm(name: string, fallback = '친구'): string {
   const n = name.trim() || fallback;
   return lastHasBatchim(n) ? n + '아' : n + '야';

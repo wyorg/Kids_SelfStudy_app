@@ -101,7 +101,7 @@ export default function SpaceApp({ ns, name, chrome }: ThemeAppProps) {
     return `${d.getFullYear()}-${mm}-${dd}`;
   }, []);
 
-  // 한국어 조사용 이름 변형 (민건 → 민건이 / 민건아). 공통 헬퍼 사용.
+  // 한국어 조사용 이름 변형 (받침에 맞춰 '~이/~아' 처리). 공통 헬퍼 사용.
   const famName = useMemo(() => famForm(name), [name]);
   const vocativeName = useMemo(() => vocativeForm(name), [name]);
 

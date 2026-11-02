@@ -46,11 +46,11 @@ npm run standalone   # 우리아이-오늘의미션.html 재생성
 - `src/themes/FairytaleApp.tsx` — 동화나라 테마 화면
 - `src/appShared.ts` — 두 테마 공통 로직(효과음, 한국어 조사용 이름 변형, 프로필 타입)
 - 프로필별 저장 키는 `<프로필id>-missions`, `<프로필id>-stamps` … 형태로 네임스페이스됨.
-  최초 실행 시 기존 `mingeon-*`(민건/우주) 데이터를 잇는 기본 프로필이 자동 생성됩니다.
+  처음 열면 기본 프로필(우주 테마) 하나가 자동 생성됩니다.
 
 ## 원본 사양 대비 수정/확장 이력
 
-원본 `CLAUDE_CODE_EXPORTS.md`(단일 우주 앱)에서 출발해 아래를 고치고 확장했습니다.
+최초 단일 우주 앱 사양에서 출발해 아래를 고치고 확장했습니다.
 
 1. `package.json` — `"^18.2.0" || "^19.0.0"` 형태 JSON 문법 오류 → 단일 버전 정리
 2. `package.json` — 누락된 `@vitejs/plugin-react` 추가
@@ -58,4 +58,4 @@ npm run standalone   # 우리아이-오늘의미션.html 재생성
 4. `tsconfig.json` — `npm run build`(tsc)에 필요하여 추가
 5. `src/App.tsx` — `restoreDefaultMissions()`의 히스토리 저장 인자 버그 수정
 6. 설치형 PWA(매니페스트·아이콘·서비스워커) 추가
-7. 아이 이름 변경 → **여러 아이 프로필 + 테마 전환**으로 확장 (동화 테마는 기존 `app-mingyeol`을 흡수)
+7. 아이 이름 변경 → **여러 아이 프로필 + 테마 전환**으로 확장
